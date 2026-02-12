@@ -1,0 +1,227 @@
+<html lang="es"><head><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark antialiased transition-colors duration-200">```html
+
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Semedic Patient Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2A388F", // Deep Blue from logo
+                        secondary: "#ED1C24", // Red from logo
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#111827",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "accent-blue": "#E0E7FF",
+                        "accent-teal": "#CCFBF1",
+                        "accent-purple": "#F3E8FF",
+                        "accent-orange": "#FFEDD5",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+
+<div class="max-w-md mx-auto relative min-h-screen pb-24 bg-background-light dark:bg-background-dark overflow-hidden">
+<header class="pt-12 pb-6 px-6 flex justify-between items-center bg-white dark:bg-card-dark sticky top-0 z-20 shadow-sm transition-colors duration-200">
+<div class="flex items-center space-x-3">
+<div class="relative">
+<img alt="Profile Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-primary shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgxuYXaVyuGJKZrFG4T3-Ej07gsbr8p-ivfGCLvkenDh42jgGqRt8xnRj__1zbY2rYX6Y94s4Gs3Phjfljmr7OY0fOBdHeSNTJBTpWLk_BQIGcQ-3nDYUxFJOe4LZUWcYzqGd4evn0yiLmFEA487POIaRrVMctlFlnDRIo_s7S8BO9qrijpHiEn5KbYfG5OwDqZhVTVTsNnhD0QwE8UftuyTGONyCsEnIwOVjRPYy1hYp5RpkR5f955EuQkhicWiYg-KkpZ4LddvKw"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-card-dark"></div>
+</div>
+<div>
+<p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Bienvenido de nuevo</p>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">Hola, Juan 👋</h1>
+</div>
+</div>
+<button class="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons-round text-gray-600 dark:text-gray-300 text-2xl">notifications</span>
+<span class="absolute top-2 right-2 w-2.5 h-2.5 bg-secondary rounded-full ring-2 ring-white dark:ring-card-dark animate-pulse"></span>
+</button>
+</header>
+<main class="px-6 space-y-6 pt-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-round text-gray-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3.5 border-none rounded-xl bg-white dark:bg-card-dark text-gray-900 dark:text-white placeholder-gray-400 shadow-soft focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-card-dark transition-all" placeholder="Buscar especialidad, doctor o centro..." type="text"/>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-4 px-1">¿Qué necesitas hoy?</h2>
+<div class="grid grid-cols-2 gap-4">
+<button class="p-4 bg-white dark:bg-card-dark rounded-2xl shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1 text-left flex flex-col justify-between h-32 group">
+<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="material-icons-round">calendar_today</span>
+</div>
+<span class="font-semibold text-gray-800 dark:text-gray-100 text-sm">Agendar<br/>Cita</span>
+</button>
+<button class="p-4 bg-white dark:bg-card-dark rounded-2xl shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1 text-left flex flex-col justify-between h-32 group">
+<div class="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+<span class="material-icons-round">videocam</span>
+</div>
+<span class="font-semibold text-gray-800 dark:text-gray-100 text-sm">Cita<br/>Virtual</span>
+</button>
+<button class="p-4 bg-white dark:bg-card-dark rounded-2xl shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1 text-left flex flex-col justify-between h-32 group">
+<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+<span class="material-icons-round">science</span>
+</div>
+<span class="font-semibold text-gray-800 dark:text-gray-100 text-sm">Laboratorio</span>
+</button>
+<button class="p-4 bg-white dark:bg-card-dark rounded-2xl shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1 text-left flex flex-col justify-between h-32 group">
+<div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+<span class="material-icons-round">biotech</span>
+</div>
+<span class="font-semibold text-gray-800 dark:text-gray-100 text-sm">Exámenes</span>
+</button>
+</div>
+</div>
+<div class="bg-primary rounded-2xl p-5 shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-10 -mt-10 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-8 -mb-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<h3 class="text-white/80 text-xs font-semibold uppercase tracking-wider mb-1">Siguiente Cita</h3>
+<p class="text-white text-lg font-bold">En 2 días, 5 horas</p>
+</div>
+<span class="bg-white/20 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg">Confirmada</span>
+</div>
+<div class="flex items-center space-x-4 mb-5 relative z-10">
+<img alt="Dr. Roberto Martinez" class="w-14 h-14 rounded-full object-cover border-2 border-white/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Q0ij2O2oIHoG0YsXiWBYMo3Q3HW9Y-gCRBFksE-1ibTDveKIjpWe6iPtgcsv9l-xQq_JGKPiuF3GO19GTis4NterTuNQSmImGikNUxYsCuR_49bUBvhxHpMgEimTK571kAUYAPlz_36sh9bIP5i3xls7J7cARzdnLbgvco86SdoGSRr0uWeB26PtL120nrp7FK-1bDzjC7U9abhLjMB9PRL-Wz0jIknNcEfdjnxnVOA6jPTzgJlR2M5Rh-QawK0oy40RmPo0d5Pa"/>
+<div>
+<h4 class="text-white font-bold">Dr. Roberto Martinez</h4>
+<p class="text-blue-100 text-sm">Cardiología</p>
+<div class="flex items-center text-blue-200 text-xs mt-1">
+<span class="material-icons-round text-sm mr-1">schedule</span>
+                            14 Oct, 10:30 AM
+                        </div>
+</div>
+</div>
+<div class="flex space-x-3 relative z-10">
+<button class="flex-1 bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-xl text-sm font-medium transition-colors border border-white/20">
+                        Ver detalles
+                    </button>
+<button class="flex-1 bg-white text-primary hover:bg-gray-50 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm flex justify-center items-center space-x-1">
+<span class="material-icons-round text-base">videocam</span>
+<span>Iniciar</span>
+</button>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-4 px-1">
+<h2 class="text-lg font-bold">Cerca de Mí</h2>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">Ver mapa</a>
+</div>
+<div class="bg-white dark:bg-card-dark p-3 rounded-2xl shadow-soft">
+<div class="h-32 rounded-xl bg-gray-200 dark:bg-gray-700 w-full overflow-hidden relative">
+<img alt="Map Preview" class="w-full h-full object-cover opacity-80 dark:opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYmaEhM1Mp5cYayFznDFi3tAY7a_8WGSIE78x1FgMmV24ff7Mt_HvwPZsXEjBDIplDdahK_XnWFHU2WJVvjvqvDiDzNZ3CtpxBof6gsieNRA-iPcdaNHxDbAmnrVGRp3IF-R1yc4opETE5Ghg6ZBW5E9-CXn6obo4F9jfLc8xz96XMm3n2R7HBK9gYGCueGuzH59texboMoZ_DXMivSHPIN1krBR9nG7MxgvfRGg40cEa7GpttzT_hPMR1uFwS9_1QHjflZjL2YUpA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg">
+<span class="material-icons-round text-secondary text-2xl">location_on</span>
+</div>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<h4 class="font-bold text-gray-900 dark:text-white text-sm">Semedic Central</h4>
+<p class="text-gray-500 dark:text-gray-400 text-xs">Av. Principal 123 • 2.5 km</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-primary">
+<span class="material-icons-round text-sm">directions</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pb-6">
+<h2 class="text-lg font-bold mb-4 px-1">Ofertas Especiales</h2>
+<div class="flex overflow-x-auto space-x-4 pb-4 no-scrollbar">
+<div class="flex-shrink-0 w-64 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-20 transform translate-x-4 translate-y-4">
+<span class="material-icons-round text-9xl">medical_services</span>
+</div>
+<span class="bg-white/20 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">Chequeo General</span>
+<h3 class="font-bold text-lg mb-1">20% Descuento</h3>
+<p class="text-sm text-blue-100 mb-3">En análisis de sangre completos.</p>
+<button class="text-xs bg-white text-blue-600 px-3 py-1.5 rounded-lg font-bold">Reclamar</button>
+</div>
+<div class="flex-shrink-0 w-64 bg-gradient-to-r from-rose-400 to-red-500 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-20 transform translate-x-4 translate-y-4">
+<span class="material-icons-round text-9xl">favorite</span>
+</div>
+<span class="bg-white/20 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">Cardiología</span>
+<h3 class="font-bold text-lg mb-1">Consulta Gratis</h3>
+<p class="text-sm text-rose-100 mb-3">Para mayores de 60 años.</p>
+<button class="text-xs bg-white text-rose-600 px-3 py-1.5 rounded-lg font-bold">Ver más</button>
+</div>
+</div>
+</div>
+</main>
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-secondary text-white rounded-full shadow-lg shadow-red-500/40 flex items-center justify-center z-30 hover:scale-105 transition-transform">
+<span class="material-icons-round text-2xl">emergency</span>
+</button>
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 px-6 py-3 z-40 max-w-md mx-auto">
+<div class="flex justify-between items-center">
+<button class="flex flex-col items-center space-y-1 text-primary">
+<span class="material-icons-round">home</span>
+<span class="text-[10px] font-medium">Inicio</span>
+</button>
+<button class="flex flex-col items-center space-y-1 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
+<span class="material-icons-round">calendar_month</span>
+<span class="text-[10px] font-medium">Citas</span>
+</button>
+<div class="w-8"></div>
+<button class="flex flex-col items-center space-y-1 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
+<span class="material-icons-round">chat_bubble</span>
+<span class="text-[10px] font-medium">Chat</span>
+</button>
+<button class="flex flex-col items-center space-y-1 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
+<span class="material-icons-round">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</button>
+</div>
+<div class="absolute -top-6 left-1/2 transform -translate-x-1/2 pointer-events-none">
+</div>
+</nav>
+</div>
+<script>
+        // Simple dark mode toggle for testing purposes
+        // In a real app, this would respect system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+</body></html>
