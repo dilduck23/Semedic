@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { EmergencyFAB } from "@/components/layout/emergency-fab";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
