@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { use, useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { DailyProvider } from "@daily-co/daily-react";

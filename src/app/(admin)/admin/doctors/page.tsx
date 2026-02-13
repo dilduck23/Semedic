@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 import { type ColumnDef } from "@tanstack/react-table";
 import { AdminPageShell } from "@/components/admin/admin-page-shell";

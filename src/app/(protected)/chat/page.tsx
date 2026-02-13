@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { ChatRoomList } from "@/components/chat/chat-room-list";
 
 export default function ChatPage() {

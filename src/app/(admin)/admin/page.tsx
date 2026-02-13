@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { AdminPageShell } from "@/components/admin/admin-page-shell";
 import { StatCard } from "@/components/admin/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
