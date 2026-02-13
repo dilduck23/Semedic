@@ -22,11 +22,12 @@ INSERT INTO public.specialties (name, icon_name, is_popular, sort_order) VALUES
   ('Psiquiatria', 'psychology', false, 16),
   ('Urologia', 'urology', false, 17);
 
--- MEDICAL CENTERS
+-- MEDICAL CENTERS (Guayaquil, Ecuador)
 INSERT INTO public.medical_centers (name, address, lat, lng, phone, hours) VALUES
-  ('Semedic Central', 'Av. Principal 123', 18.4861, -69.9312, '809-555-0100', 'Lun-Vie 7:00-19:00, Sab 8:00-14:00'),
-  ('Semedic Plaza Salud', 'Calle Salud 456, Ens. Naco', 18.4735, -69.9290, '809-555-0200', 'Lun-Vie 8:00-18:00'),
-  ('Semedic Norte', 'Av. Charles de Gaulle 789', 18.5100, -69.8900, '809-555-0300', 'Lun-Sab 7:00-20:00');
+  ('Semedic Kennedy (Norte)', 'Av. Dr. Jorge Perez Concha 905, Guayaquil', -2.1654424, -79.914185, NULL, 'Lun-Vie 7:00-19:00, Sab 8:00-14:00'),
+  ('Semedic Centro Medico (Sur - Bolivia)', 'Bolivia & Calle Hideyo Noguchi, Guayaquil', -2.2120408, -79.8894484, NULL, 'Lun-Vie 7:00-19:00, Sab 8:00-14:00'),
+  ('Semedic (Sur - Hideyo Noguchi)', 'Calle Hideyo Noguchi 2323, Guayaquil', -2.2120532, -79.8894735, NULL, 'Lun-Vie 7:00-19:00, Sab 8:00-14:00'),
+  ('Centro Medico Kennedy (Semedic)', 'Calle 10 NO, Guayaquil', -2.1729926, -79.8982555, NULL, 'Lun-Vie 7:00-19:00, Sab 8:00-14:00');
 
 -- DOCTORS
 -- Get specialty IDs
@@ -52,6 +53,7 @@ DECLARE
   v_center1_id UUID;
   v_center2_id UUID;
   v_center3_id UUID;
+  v_center4_id UUID;
 BEGIN
   SELECT id INTO v_cardio_id FROM public.specialties WHERE name = 'Cardiologia';
   SELECT id INTO v_dermato_id FROM public.specialties WHERE name = 'Dermatologia';
@@ -71,9 +73,10 @@ BEGIN
   SELECT id INTO v_otorrino_id FROM public.specialties WHERE name = 'Otorrinolaringologia';
   SELECT id INTO v_cardio_ped_id FROM public.specialties WHERE name = 'Cardiologia Pediatrica';
 
-  SELECT id INTO v_center1_id FROM public.medical_centers WHERE name = 'Semedic Central';
-  SELECT id INTO v_center2_id FROM public.medical_centers WHERE name = 'Semedic Plaza Salud';
-  SELECT id INTO v_center3_id FROM public.medical_centers WHERE name = 'Semedic Norte';
+  SELECT id INTO v_center1_id FROM public.medical_centers WHERE name = 'Semedic Kennedy (Norte)';
+  SELECT id INTO v_center2_id FROM public.medical_centers WHERE name = 'Semedic Centro Medico (Sur - Bolivia)';
+  SELECT id INTO v_center3_id FROM public.medical_centers WHERE name = 'Semedic (Sur - Hideyo Noguchi)';
+  SELECT id INTO v_center4_id FROM public.medical_centers WHERE name = 'Centro Medico Kennedy (Semedic)';
 
   -- Cardiologia (12 doctors as shown in mockup)
   INSERT INTO public.doctors (specialty_id, full_name, license_number, bio, consultation_price, rating, total_reviews, avatar_url) VALUES
@@ -182,26 +185,41 @@ BEGIN
     (v_cardio_ped_id, 'Dra. Pilar Ochoa', 'MED-074', 'Cardiopatias congenitas en ninos.', 90.00, 4.8, 112, NULL),
     (v_cardio_ped_id, 'Dr. Alberto Fuentes', 'MED-075', 'Ecocardiografia pediatrica.', 85.00, 4.7, 87, NULL);
 
-  -- DOCTOR SCHEDULES (Mon-Fri for all doctors at center 1, some at center 2)
-  -- Creating schedules for the first 10 doctors as examples
+  -- DOCTOR SCHEDULES distributed across 4 centers
+  -- Center 1 (Kennedy Norte): Morning Mon-Fri
   INSERT INTO public.doctor_schedules (doctor_id, center_id, day_of_week, start_time, end_time, slot_duration)
   SELECT d.id, v_center1_id, dow.day, '08:00'::TIME, '12:00'::TIME, 30
   FROM public.doctors d
   CROSS JOIN (VALUES (1),(2),(3),(4),(5)) AS dow(day)
   WHERE d.license_number IN ('MED-001','MED-002','MED-003','MED-004','MED-005','MED-013','MED-022','MED-040','MED-045','MED-050');
 
+  -- Center 1 (Kennedy Norte): Afternoon Mon-Fri
   INSERT INTO public.doctor_schedules (doctor_id, center_id, day_of_week, start_time, end_time, slot_duration)
   SELECT d.id, v_center1_id, dow.day, '14:00'::TIME, '17:00'::TIME, 30
   FROM public.doctors d
   CROSS JOIN (VALUES (1),(2),(3),(4),(5)) AS dow(day)
   WHERE d.license_number IN ('MED-001','MED-002','MED-003','MED-004','MED-005','MED-013','MED-022','MED-040','MED-045','MED-050');
 
-  -- Schedules at center 2 for some doctors
+  -- Center 2 (Sur - Bolivia): Mon/Wed/Fri
   INSERT INTO public.doctor_schedules (doctor_id, center_id, day_of_week, start_time, end_time, slot_duration)
   SELECT d.id, v_center2_id, dow.day, '09:00'::TIME, '13:00'::TIME, 30
   FROM public.doctors d
   CROSS JOIN (VALUES (1),(3),(5)) AS dow(day)
   WHERE d.license_number IN ('MED-006','MED-007','MED-008','MED-014','MED-015','MED-023','MED-041','MED-046','MED-051','MED-056');
+
+  -- Center 3 (Sur - Hideyo Noguchi): Tue/Thu
+  INSERT INTO public.doctor_schedules (doctor_id, center_id, day_of_week, start_time, end_time, slot_duration)
+  SELECT d.id, v_center3_id, dow.day, '08:00'::TIME, '12:00'::TIME, 30
+  FROM public.doctors d
+  CROSS JOIN (VALUES (2),(4)) AS dow(day)
+  WHERE d.license_number IN ('MED-006','MED-007','MED-008','MED-014','MED-015','MED-023','MED-041','MED-046','MED-051','MED-056');
+
+  -- Center 4 (Centro Medico Kennedy): Mon-Sat
+  INSERT INTO public.doctor_schedules (doctor_id, center_id, day_of_week, start_time, end_time, slot_duration)
+  SELECT d.id, v_center4_id, dow.day, '08:00'::TIME, '13:00'::TIME, 30
+  FROM public.doctors d
+  CROSS JOIN (VALUES (1),(2),(3),(4),(5),(6)) AS dow(day)
+  WHERE d.license_number IN ('MED-009','MED-010','MED-011','MED-012','MED-016','MED-024','MED-042','MED-047','MED-052','MED-058');
 
 END $$;
 
