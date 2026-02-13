@@ -20,6 +20,21 @@ export const ROUTES = {
   PROFILE: "/profile",
   NOTIFICATIONS: "/notifications",
   PROMOTIONS: "/promotions",
+  LAB_ORDERS: "/lab-orders",
+  EXAM_ORDERS: "/exam-orders",
+  VIDEO: "/video",
+  ADMIN: {
+    DASHBOARD: "/admin",
+    USERS: "/admin/users",
+    DOCTORS: "/admin/doctors",
+    SPECIALTIES: "/admin/specialties",
+    CENTERS: "/admin/centers",
+    APPOINTMENTS: "/admin/appointments",
+    PAYMENTS: "/admin/payments",
+    PROMOTIONS: "/admin/promotions",
+    LAB_ORDERS: "/admin/lab-orders",
+    EXAM_ORDERS: "/admin/exam-orders",
+  },
 } as const;
 
 export const SPECIALTY_ICONS: Record<string, string> = {
@@ -82,7 +97,31 @@ export const NOTIFICATION_TYPE_ICONS: Record<string, string> = {
   appointment_cancelled: "cancel",
   appointment_reminder: "alarm",
   promotion: "local_offer",
+  lab_results_ready: "science",
+  exam_results_ready: "biotech",
+  video_session_starting: "videocam",
+  chat_message: "chat_bubble",
 };
+
+export const ORDER_STATUS_LABELS: Record<string, string> = {
+  pending: "Pendiente",
+  confirmed: "Confirmado",
+  in_progress: "En Progreso",
+  completed: "Completado",
+  cancelled: "Cancelado",
+};
+
+export const ORDER_STATUS_COLORS: Record<string, string> = {
+  pending: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+  confirmed: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+  in_progress: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+  completed: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+  cancelled: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+};
+
+export const LAB_CATEGORIES = ["Todos", "Sangre", "Orina", "Hormonal"] as const;
+
+export const EXAM_CATEGORIES = ["Todos", "Radiologia", "Ecografia", "Resonancia", "Tomografia", "Otro"] as const;
 
 export const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] as const;
 

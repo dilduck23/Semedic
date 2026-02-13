@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { promotionFormSchema, type PromotionFormData } from "@/lib/validations";
-import { useCreatePromotion } from "@/hooks/use-promotions";
+import { useCreatePromotion } from "@/hooks/use-admin";
 import { useSpecialties } from "@/hooks/use-specialties";
 import { MaterialIcon } from "@/components/shared/material-icon";
 import { Input } from "@/components/ui/input";

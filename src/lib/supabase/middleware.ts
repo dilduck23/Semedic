@@ -51,6 +51,21 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Admin route protection: only allow users with admin role
+  if (user && request.nextUrl.pathname.startsWith("/admin")) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "admin") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
+  }
+
   // Redirect root to dashboard if authenticated, login if not
   if (request.nextUrl.pathname === "/") {
     const url = request.nextUrl.clone();

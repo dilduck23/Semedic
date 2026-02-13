@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/shared/material-icon";
 import { ROUTES } from "@/lib/constants";
-import { toast } from "sonner";
 
 const actions = [
   {
@@ -18,7 +17,7 @@ const actions = [
     icon: "videocam",
     colors: "bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400",
     hoverColors: "group-hover:bg-teal-600 group-hover:text-white",
-    href: null,
+    href: ROUTES.SPECIALTIES,
   },
   {
     label: "Laboratorio",
@@ -26,7 +25,7 @@ const actions = [
     colors:
       "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
     hoverColors: "group-hover:bg-purple-600 group-hover:text-white",
-    href: null,
+    href: ROUTES.LAB_ORDERS,
   },
   {
     label: "Examenes",
@@ -34,7 +33,7 @@ const actions = [
     colors:
       "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400",
     hoverColors: "group-hover:bg-orange-600 group-hover:text-white",
-    href: null,
+    href: ROUTES.EXAM_ORDERS,
   },
 ];
 
@@ -48,13 +47,7 @@ export function ActionCards() {
         {actions.map((action) => (
           <button
             key={action.icon}
-            onClick={() => {
-              if (action.href) {
-                router.push(action.href);
-              } else {
-                toast.info("Proximamente");
-              }
-            }}
+            onClick={() => router.push(action.href)}
             className="p-4 bg-card rounded-2xl shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1 text-left flex flex-col justify-between h-32 group"
           >
             <div

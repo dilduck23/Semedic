@@ -22,61 +22,6 @@ export function usePromotions() {
   });
 }
 
-export function useAllPromotions() {
-  const supabase = createClient();
-
-  return useQuery({
-    queryKey: ["promotions", "all"],
-    queryFn: async (): Promise<Promotion[]> => {
-      const { data, error } = await supabase
-        .from("promotions")
-        .select("*, specialty:specialties(name)")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      return data;
-    },
-  });
-}
-
-export function useCreatePromotion() {
-  const supabase = createClient();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (promotion: {
-      title: string;
-      description?: string;
-      type: string;
-      discount_value: number;
-      coupon_code: string;
-      specialty_id?: string;
-      valid_from: string;
-      valid_to: string;
-      max_uses?: number;
-      gradient_from?: string;
-      gradient_to?: string;
-      icon_name?: string;
-    }) => {
-      const { data, error } = await supabase
-        .from("promotions")
-        .insert({
-          ...promotion,
-          coupon_code: promotion.coupon_code.toUpperCase(),
-          specialty_id: promotion.specialty_id || null,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["promotions"] });
-    },
-  });
-}
-
 export function useIncrementCouponUsage() {
   const supabase = createClient();
   const queryClient = useQueryClient();

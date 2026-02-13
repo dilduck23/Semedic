@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/client";
 import type { Notification } from "@/types";
@@ -24,8 +25,9 @@ export function useNotifications() {
 
 export function useUnreadNotificationCount() {
   const supabase = createClient();
+  const queryClient = useQueryClient();
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ["notification-count"],
     queryFn: async (): Promise<number> => {
       const { count, error } = await supabase
@@ -36,8 +38,32 @@ export function useUnreadNotificationCount() {
       if (error) throw error;
       return count || 0;
     },
-    refetchInterval: 30000, // Poll every 30 seconds
   });
+
+  // Subscribe to new notifications via Realtime instead of polling
+  useEffect(() => {
+    const channel = supabase
+      .channel("notifications-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+        },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ["notifications"] });
+          queryClient.invalidateQueries({ queryKey: ["notification-count"] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase, queryClient]);
+
+  return query;
 }
 
 export function useMarkNotificationRead() {

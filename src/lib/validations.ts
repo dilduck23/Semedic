@@ -43,8 +43,29 @@ export const promotionFormSchema = z.object({
   icon_name: z.string().optional(),
 });
 
+export const chatMessageSchema = z.object({
+  content: z.string().min(1, "El mensaje no puede estar vacio").max(2000, "Mensaje demasiado largo"),
+});
+
+export const labOrderSchema = z.object({
+  address: z.string().min(5, "Ingresa una direccion valida"),
+  scheduled_date: z.string().min(1, "Selecciona una fecha"),
+  scheduled_time: z.string().min(1, "Selecciona una hora"),
+  notes: z.string().optional(),
+});
+
+export const examOrderSchema = z.object({
+  center_id: z.string().min(1, "Selecciona una central medica"),
+  scheduled_date: z.string().min(1, "Selecciona una fecha"),
+  scheduled_time: z.string().min(1, "Selecciona una hora"),
+  notes: z.string().optional(),
+});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type CouponFormData = z.infer<typeof couponSchema>;
 export type PromotionFormData = z.infer<typeof promotionFormSchema>;
+export type ChatMessageFormData = z.infer<typeof chatMessageSchema>;
+export type LabOrderFormData = z.infer<typeof labOrderSchema>;
+export type ExamOrderFormData = z.infer<typeof examOrderSchema>;
