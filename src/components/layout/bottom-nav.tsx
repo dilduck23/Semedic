@@ -18,7 +18,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-6 py-3 z-40 max-w-md mx-auto lg:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-6 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-40 max-w-md mx-auto lg:hidden">
       <div className="flex justify-between items-center">
         {navItems.map((item, index) => {
           if (item.href === "__spacer__") {
